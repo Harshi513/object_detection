@@ -103,3 +103,41 @@ while True:
         if conf > 0.8:
             engine.say(f"{class_labels[int(clsID)]} detected with high confidence!")
             engine.runAndWait()
+
+# Display current confidence threshold
+    cv2.putText(
+        frame,
+        f"Confidence: {round(current_confidence, 2)}",
+        (10, 30),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        0.7,
+        (255, 255, 255),
+        2,
+    )
+
+    # Display FPS
+    frame_count += 1
+    elapsed_time = time.time() - start_time
+    fps = frame_count / elapsed_time
+    cv2.putText(
+        frame,
+        f"FPS: {round(fps, 2)}",
+        (10, 60),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        0.7,
+        (255, 255, 255),
+        2,
+    )
+
+    cv2.imshow('ObjectDetection', frame)
+
+    key = cv2.waitKey(1)
+    if key == ord('q'):
+        break
+    elif key == ord('u'):  # Increase confidence threshold
+        current_confidence += confidence_step
+    elif key == ord('d'):  # Decrease confidence threshold
+        current_confidence -= confidence_step
+
+cap.release()
+cv2.destroyAllWindows()
