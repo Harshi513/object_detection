@@ -16,3 +16,12 @@ data = my_file.read()
 # replacing end splitting the text | when newline ('\n') is seen.
 class_list = data.split("\n")
 my_file.close()
+
+
+# Generate random colors for class list
+detection_colors = []
+for i in range(len(class_list)):
+    r = random.randint(0,255)
+    g = random.randint(0,255)
+    b = random.randint(0,255)
+    detection_colors.append((b,g,r))
